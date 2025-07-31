@@ -3,23 +3,22 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PortfolioController;
+use App\Http\Controllers\MessagesController;
 
+App::setLocale('es'); //Con este set ponemos el idioma que queramos, es o en
 //El método View es mejor por cuestiones de rendimiento realmente, 
 //Ya que compacta la función - En especial para sencillas como Copyright, etc
 
 Route::view('/','home')->name('home');
 Route::view('/about','about')->name('about');
 Route::view('/contact','contact')->name('contact');
+Route::post('/contact', [MessagesController::class, 'store'])->name('contact.store');
 Route::get('/portfolio', [PortfolioController::class, 'index'])->name('portfolio');
-
 
 // Route::resource('projects', 'PortfolioController' )->only(['index', 'show']);  
 // // Route::get('/portfolio', PortfolioController::class); 
 
-Route::get('/', function () {
-    $nombre = "Jorge";
-    return view('home', compact ('nombre'));
-})->name('home');
+
 
 //Compact permite compactar el parámetro y su valor asignado
 
