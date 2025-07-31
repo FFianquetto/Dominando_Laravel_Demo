@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Mail\MessageRecieved;
+use Illuminate\Support\Facades\Mail;
 
 class MessagesController extends Controller
 {
@@ -16,6 +18,11 @@ class MessagesController extends Controller
         ]);
 
        
-        return redirect()->route('contact')->with('success', __('app.message_sent'));
+        //return redirect()->route('contact')->with('success', __('app.message_sent'));
+
+        Mail::to('fer@gmail.com')->send(new MessageRecieved());
+        return 'Mensaje enviado';
     }
+
+
 }
